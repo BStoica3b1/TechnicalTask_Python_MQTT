@@ -1,0 +1,16 @@
+import json
+import time
+from random import randint
+import paho.mqtt.publish as mqtt
+MQTT_BROKER = 'mqtt.beia-telemetrie.ro'
+port = 1883
+topic = "training/device/RndGen"
+while True:
+    value = randint(1, 30)
+    payload_dict = {'random_number': value}
+    try:
+        mqtt.single(topic, qos=1, hostname=MQTT_BROKER, payload=json.dumps(payload_dict))
+    except:
+        pass
+    print(value)
+    time.sleep(3
